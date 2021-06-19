@@ -20,3 +20,5 @@ db.authenticate().then(() => {
 server.listen(SERVER_PORT, () => {
   console.log(`Server is running on localhost:${SERVER_PORT}`);
 });
+
+module.exports = server;

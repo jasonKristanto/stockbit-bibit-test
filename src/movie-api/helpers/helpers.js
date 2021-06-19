@@ -10,8 +10,8 @@ function isExist(params) {
   return (params !== undefined && params !== null);
 }
 
-function isOptionValid(type, options) {
-  return type in options;
+function isOptionValid(params, options) {
+  return options.includes(params);
 }
 
 module.exports = {

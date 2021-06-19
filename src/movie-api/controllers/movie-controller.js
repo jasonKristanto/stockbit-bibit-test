@@ -1,14 +1,16 @@
 const { sendResponse } = require('../helpers/response-helpers');
-const movie = require('../services/movie/movie-services');
+const MovieServices = require('../services/movie-services');
 
 exports.search = async (req, res) => {
-  const result = await movie.searchService(req);
+  const myService = new MovieServices();
+  const result = await myService.search(req);
 
   sendResponse(res, result);
 };
 
 exports.detail = async (req, res) => {
-  const result = await movie.detailService(req);
+  const myService = new MovieServices();
+  const result = await myService.detail(req);
 
   sendResponse(res, result);
 };

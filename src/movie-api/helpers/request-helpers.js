@@ -4,11 +4,7 @@ const { OMDB_API_URL } = require('../config');
 const { NOT_FOUND } = require('./rc-helpers');
 const { sendSuccessResult, sendFailedResult } = require('./response-helpers');
 
-function getMovieApiUrl(params) {
-  return `${OMDB_API_URL}${params}`;
-}
-
-async function sendRequest(method = 'GET', url, data = null) {
+async function sendApiRequest(method = 'GET', url, data = null) {
   const param = {
     url,
     method,
@@ -45,4 +41,4 @@ async function sendRequest(method = 'GET', url, data = null) {
   });
 }
 
-module.exports = { getMovieApiUrl, sendRequest };
+module.exports = { sendApiRequest };
