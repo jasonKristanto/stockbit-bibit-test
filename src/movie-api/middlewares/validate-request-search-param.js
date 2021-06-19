@@ -1,4 +1,5 @@
 const { sendMiddlewareFailedResponse } = require('../helpers/response-helpers');
+const { insertApiLogData } = require('../helpers/model-helpers/api-log/insert-api-log-helper');
 
 const {
   validateMovieTitleParams,
@@ -11,6 +12,8 @@ exports.validateRequestSearchParams = async (req, res, next) => {
   const {
     title, type, year, page,
   } = req.query;
+
+  await insertApiLogData(req);
 
   const movieTitleValidationResult = validateMovieTitleParams(title);
   if (movieTitleValidationResult.status === 'failed') {
