@@ -1,0 +1,3 @@
+SELECT users.ID, users.Username, IF(users.Parent != 0, parents.UserName, 'NULL') as ParentUsername
+FROM users users
+LEFT JOIN users parents ON parents.ID = users.Parent;

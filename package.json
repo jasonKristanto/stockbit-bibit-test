@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "find-words": "node ./src/refactor-code"
   },
   "repository": {
     "type": "git",
