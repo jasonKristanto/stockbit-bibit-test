@@ -1,14 +1,35 @@
 const { getMovieApiUrl, sendRequest } = require('../../helpers/request-helpers');
-const { sendSuccessResult, sendFailedResult } = require('../../helpers/response-helpers');
 
 module.exports = {
   detailService: async (req) => {
-    const url = getMovieApiUrl('t=Batman%3A+The+Killing+Joke');
-    return sendRequest('GET', url)
-      .then((response) => sendSuccessResult('Movies found.', response.data))
-      .catch((error) => {
-        console.log(error);
-        return sendFailedResult(500, 'Failed to get movies');
-      });
+    const {
+      imdb, title, type, year, plot,
+    } = req.query;
+
+    let urlParams = '';
+
+    if (imdb !== undefined) {
+      urlParams += `i=${encodeURIComponent(imdb)}`;
+    }
+
+    if (title !== undefined) {
+      urlParams += `t=${encodeURIComponent(title)}`;
+    }
+
+    if (type !== undefined) {
+      urlParams += `&type=${encodeURIComponent(type)}`;
+    }
+
+    if (year !== undefined) {
+      urlParams += `&y=${encodeURIComponent(year)}`;
+    }
+
+    if (plot !== undefined) {
+      urlParams += `&plot=${encodeURIComponent(plot)}`;
+    }
+
+    const url = getMovieApiUrl(urlParams);
+
+    return sendRequest('GET', url);
   },
 };

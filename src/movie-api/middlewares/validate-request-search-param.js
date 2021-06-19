@@ -7,7 +7,7 @@ const {
   validateMoviePageParams,
 } = require('../helpers/middleware-helpers/middleware-helpers');
 
-exports.validateRequestParams = async (req, res, next) => {
+exports.validateRequestSearchParams = async (req, res, next) => {
   const {
     title, type, year, page,
   } = req.query;

@@ -16,6 +16,7 @@ const sendResponse = (res, result) => {
   res.status(result.statusCode).json({
     message: result.message,
     data: result.data,
+    details: result.details,
   });
 };
 

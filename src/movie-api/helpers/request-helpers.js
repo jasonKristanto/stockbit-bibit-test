@@ -30,20 +30,19 @@ async function sendRequest(method = 'GET', url, data = null) {
     }
 
     return sendSuccessResult('Movies found', response.data);
-  })
-    .catch((error) => {
-      console.log(error);
+  }).catch((error) => {
+    console.log(error);
 
-      let statusCode = 500;
-      let message = 'Failed to get movies';
+    let statusCode = 500;
+    let { message } = error;
 
-      if (error.message === 'Movie not found!') {
-        statusCode = NOT_FOUND.CODE;
-        message = NOT_FOUND.MESSAGE;
-      }
+    if (message === 'Movie not found!' || message === 'Incorrect IMDb ID.') {
+      statusCode = NOT_FOUND.CODE;
+      message = NOT_FOUND.MESSAGE;
+    }
 
-      return sendFailedResult(statusCode, message);
-    });
+    return sendFailedResult(statusCode, 'Failed to get movie', message);
+  });
 }
 
 module.exports = { getMovieApiUrl, sendRequest };

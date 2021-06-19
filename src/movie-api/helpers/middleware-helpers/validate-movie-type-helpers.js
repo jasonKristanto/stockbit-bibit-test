@@ -1,4 +1,5 @@
 const validationHelpers = require('../validation-helpers');
+const { typeParamsOptions } = require('../validation-helpers');
 
 const validateMovieTypeParams = (type) => {
   if (validationHelpers.isParamsExist(type)) {
@@ -9,7 +10,7 @@ const validateMovieTypeParams = (type) => {
       };
     }
 
-    if (!validationHelpers.isTypeParamValid(type)) {
+    if (!validationHelpers.isParamValidOptions(type, typeParamsOptions)) {
       return {
         status: 'failed',
         message: 'Type parameter only accept value as \'movie \', \'series \', and \'episode\'',

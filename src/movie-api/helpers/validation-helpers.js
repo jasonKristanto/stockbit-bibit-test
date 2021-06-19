@@ -1,4 +1,5 @@
 const typeParamsOptions = ['movie', 'series', 'episode'];
+const plotParamsOptions = ['full', 'short'];
 
 function isNumeric(params) {
   return !Number.isNaN(Number(params));
@@ -12,10 +13,15 @@ function isParamsExist(params) {
   return (params !== undefined && params !== null);
 }
 
-function isTypeParamValid(type) {
-  return typeParamsOptions.includes(type);
+function isParamValidOptions(type, options) {
+  return options.includes(type);
 }
 
 module.exports = {
-  isNumeric, isString, isParamsExist, isTypeParamValid,
+  typeParamsOptions,
+  plotParamsOptions,
+  isNumeric,
+  isString,
+  isParamsExist,
+  isParamValidOptions,
 };
