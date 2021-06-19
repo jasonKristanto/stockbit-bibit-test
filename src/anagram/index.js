@@ -21,4 +21,4 @@ function anagram(arrWords) {
   return ans;
 }
 
-console.log(anagram(['kita', 'atik', 'tika', 'aku', 'kia', 'makan', 'kua', 'makam', 'akan', 'kodok', 'aki', 'apel', 'elap', 'peal']));
+module.exports = { anagram };

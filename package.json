@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./src",
-    "find-words": "node ./src/refactor-code",
-    "anagram": "node ./src/anagram"
+    "find-words": "node ./src/refactor-code/sandbox",
+    "anagram": "node ./src/anagram/sandbox",
+    "movie-api": "node ./src/movie-api"
   },
   "repository": {
     "type": "git",
