@@ -1,12 +1,12 @@
 const { sendMiddlewareFailedResponse } = require('../helpers/response-helpers');
-const { insertApiLogData } = require('../helpers/model-helpers/api-log/insert-api-log-helper');
+const { insertApiLogData } = require('../helpers/model-helpers/api-log/insert-data-helper');
 
 const {
-  validateMovieTitleParams,
-  validateMovieTypeParams,
+  validateMovieTitleImdbParams,
   validateMovieYearParams,
   validateMoviePageParams,
-} = require('../helpers/middleware-helpers/middleware-helpers');
+  validateOptions,
+} = require('../helpers/validation-helpers/validation-helpers');
 
 exports.validateRequestSearchParams = async (req, res, next) => {
   const {
@@ -15,13 +15,13 @@ exports.validateRequestSearchParams = async (req, res, next) => {
 
   await insertApiLogData(req);
 
-  const movieTitleValidationResult = validateMovieTitleParams(title);
+  const movieTitleValidationResult = validateMovieTitleImdbParams(title);
   if (movieTitleValidationResult.status === 'failed') {
     sendMiddlewareFailedResponse(res, 400, movieTitleValidationResult.message);
     return;
   }
 
-  const movieTypeValidationResult = validateMovieTypeParams(type);
+  const movieTypeValidationResult = validateOptions(type, 'type');
   if (movieTypeValidationResult.status === 'failed') {
     sendMiddlewareFailedResponse(res, 400, movieTypeValidationResult.message);
     return;

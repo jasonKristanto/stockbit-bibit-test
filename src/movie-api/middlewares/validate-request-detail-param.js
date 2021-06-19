@@ -1,12 +1,11 @@
 const { sendMiddlewareFailedResponse } = require('../helpers/response-helpers');
-const { insertApiLogData } = require('../helpers/model-helpers/api-log/insert-api-log-helper');
+const { insertApiLogData } = require('../helpers/model-helpers/api-log/insert-data-helper');
 
 const {
-  validateMovieTitleParams,
-  validateMovieTypeParams,
+  validateMovieTitleImdbParams,
   validateMovieYearParams,
-  validateMoviePlotParams,
-} = require('../helpers/middleware-helpers/middleware-helpers');
+  validateOptions,
+} = require('../helpers/validation-helpers/validation-helpers');
 
 exports.validateRequestDetailParams = async (req, res, next) => {
   const {
@@ -15,15 +14,15 @@ exports.validateRequestDetailParams = async (req, res, next) => {
 
   await insertApiLogData(req);
 
-  const movieImdbValidationResult = validateMovieTitleParams(imdb);
-  const movieTitleValidationResult = validateMovieTitleParams(title);
+  const movieImdbValidationResult = validateMovieTitleImdbParams(imdb);
+  const movieTitleValidationResult = validateMovieTitleImdbParams(title);
 
   if (movieImdbValidationResult.status === 'failed' && movieTitleValidationResult.status === 'failed') {
     sendMiddlewareFailedResponse(res, 400, movieImdbValidationResult.message);
     return;
   }
 
-  const movieTypeValidationResult = validateMovieTypeParams(type);
+  const movieTypeValidationResult = validateOptions(type, 'type');
   if (movieTypeValidationResult.status === 'failed') {
     sendMiddlewareFailedResponse(res, 400, movieTypeValidationResult.message);
     return;
@@ -35,7 +34,7 @@ exports.validateRequestDetailParams = async (req, res, next) => {
     return;
   }
 
-  const moviePlotValidationResult = validateMoviePlotParams(plot);
+  const moviePlotValidationResult = validateOptions(plot, 'plot');
   if (moviePlotValidationResult.status === 'failed') {
     sendMiddlewareFailedResponse(res, 400, moviePlotValidationResult.message);
     return;

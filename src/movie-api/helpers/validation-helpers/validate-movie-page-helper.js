@@ -1,10 +1,10 @@
-const validationHelpers = require('../validation-helpers');
+const validationHelpers = require('../helpers');
 
 const pageMin = 1;
 const pageMax = 100;
 
 const validateMoviePageParams = (page) => {
-  if (validationHelpers.isParamsExist(page)) {
+  if (validationHelpers.isExist(page)) {
     if (!validationHelpers.isNumeric(page)) {
       return {
         status: 'failed',

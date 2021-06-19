@@ -1,7 +1,7 @@
-const validationHelpers = require('../validation-helpers');
+const validationHelpers = require('../helpers');
 
-const validateMovieTitleParams = (title) => {
-  if (!validationHelpers.isParamsExist(title)) {
+const validateMovieTitleImdbParams = (title) => {
+  if (!validationHelpers.isExist(title)) {
     return {
       status: 'failed',
       message: 'Title parameter is required',
@@ -21,5 +21,5 @@ const validateMovieTitleParams = (title) => {
 };
 
 module.exports = {
-  validateMovieTitleParams,
+  validateMovieTitleImdbParams,
 };

@@ -1,7 +1,7 @@
-const validationHelpers = require('../validation-helpers');
+const validationHelpers = require('../helpers');
 
 const validateMovieYearParams = (year) => {
-  if (validationHelpers.isParamsExist(year)) {
+  if (validationHelpers.isExist(year)) {
     if (!validationHelpers.isNumeric(year)) {
       return {
         status: 'failed',

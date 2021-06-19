@@ -1,10 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const { SERVER_PORT } = require('./config');
+
 const routes = require('./routes');
 const db = require('./models/connection');
-
-const { SERVER_PORT } = require('./config');
 
 const server = express();
 
