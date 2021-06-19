@@ -19,8 +19,15 @@ const sendResponse = (res, result) => {
   });
 };
 
+const sendMiddlewareFailedResponse = (res, statusCode = 500, message = 'failed', data = []) => {
+  res.status(statusCode).json({
+    message, data,
+  });
+};
+
 module.exports = {
   sendSuccessResult,
   sendFailedResult,
   sendResponse,
+  sendMiddlewareFailedResponse,
 };

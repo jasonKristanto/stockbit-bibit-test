@@ -1,14 +1,27 @@
 const { getMovieApiUrl, sendRequest } = require('../../helpers/request-helpers');
-const { sendSuccessResult, sendFailedResult } = require('../../helpers/response-helpers');
 
 module.exports = {
   searchService: async (req) => {
-    const url = getMovieApiUrl('s=Batman');
-    return sendRequest('GET', url)
-      .then((response) => sendSuccessResult('Movies found.', response.data))
-      .catch((error) => {
-        console.log(error);
-        return sendFailedResult(500, 'Failed to get movies');
-      });
+    const {
+      title, type, year, page,
+    } = req.query;
+
+    let urlParams = `s=${encodeURIComponent(title)}`;
+
+    if (type !== undefined) {
+      urlParams += `&type=${encodeURIComponent(type)}`;
+    }
+
+    if (year !== undefined) {
+      urlParams += `&y=${encodeURIComponent(year)}`;
+    }
+
+    if (page !== undefined) {
+      urlParams += `&page=${encodeURIComponent(page)}`;
+    }
+
+    const url = getMovieApiUrl(urlParams);
+
+    return sendRequest('GET', url);
   },
 };
