@@ -1,19 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const routes = require('./routes');
+
+const { SERVER_PORT } = require('./config');
 
 const server = express();
-const serverPort = 3000;
 
 server.use(bodyParser.json());
+server.use('/', routes);
 
-server.get('/', ((req, res) => {
-  res.status(200).json({
-    message: 'hello movie-api',
-  });
-
-  res.end();
-}));
-
-server.listen(serverPort, () => {
-  console.log(`Server is running on localhost:${serverPort}`);
+server.listen(SERVER_PORT, () => {
+  console.log(`Server is running on localhost:${SERVER_PORT}`);
 });
