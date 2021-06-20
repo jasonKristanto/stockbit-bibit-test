@@ -7,7 +7,10 @@
     "lint": "eslint ./src",
     "anagram": "node ./src/anagram/sandbox",
     "find-words": "node ./src/refactor-code/sandbox",
-    "movie-api": "node ./src/movie-api/server"
+    "movie-api": "env NODE_ENV=development node ./src/movie-api/server",
+    "db-movie-api": "env NODE_ENV=development npx sequelize db:create && env NODE_ENV=development npx sequelize db:migrate",
+    "movie-api-test": "env NODE_ENV=test mocha --recursive \"./src/movie-api/test/*.js\"",
+    "db-movie-api-test": "env NODE_ENV=test npx sequelize db:create && env NODE_ENV=test npx sequelize db:migrate"
   },
   "repository": {
     "type": "git",
@@ -21,13 +24,22 @@
   },
   "homepage": "https://github.com/jasonKristanto/stockbit-bibit-test#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "dotenv": "^10.0.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2"
   },
   "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.3.0",
     "eslint": "^7.29.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.23.4"
+    "eslint-plugin-import": "^2.23.4",
+    "mocha": "^9.0.1",
+    "sequelize-cli": "^6.2.0",
+    "sinon": "^11.1.1"
   }
 }
