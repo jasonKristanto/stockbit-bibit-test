@@ -2,7 +2,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { describe, it, beforeEach } = require('mocha');
 
-const server = require('../../../server');
+const server = require('../../server');
 
 const { expect } = chai;
 chai.use(chaiHttp);
@@ -29,7 +29,11 @@ const testServerHelpers = (endpoint) => {
           expect(res.body).to.have.property('data');
           expect(res.body.data).to.have.property('Response').and.equals('True');
 
-          done();
+          if (err) {
+            done(err);
+          } else {
+            done();
+          }
         });
     });
 
@@ -48,7 +52,11 @@ const testServerHelpers = (endpoint) => {
             expect(res.body).to.have.property('message').and.equals('Title parameter is required');
           }
 
-          done();
+          if (err) {
+            done(err);
+          } else {
+            done();
+          }
         });
     });
 
@@ -63,7 +71,11 @@ const testServerHelpers = (endpoint) => {
           expect(res.body).to.have.property('message').and.equals('Failed to get movie');
           expect(res.body).to.have.property('details').and.equals('Movie not found');
 
-          done();
+          if (err) {
+            done(err);
+          } else {
+            done();
+          }
         });
     });
 
@@ -77,7 +89,11 @@ const testServerHelpers = (endpoint) => {
           expect(res.status).to.equals(400);
           expect(res.body).to.have.property('message').and.equals('Type parameter only accept value as movie, series, episode');
 
-          done();
+          if (err) {
+            done(err);
+          } else {
+            done();
+          }
         });
     });
 
@@ -91,7 +107,11 @@ const testServerHelpers = (endpoint) => {
           expect(res.status).to.equals(400);
           expect(res.body).to.have.property('message').and.equals('Year parameter must be a number');
 
-          done();
+          if (err) {
+            done(err);
+          } else {
+            done();
+          }
         });
     });
   });

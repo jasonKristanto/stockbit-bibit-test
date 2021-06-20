@@ -1,6 +1,5 @@
 const axios = require('axios');
 
-const { OMDB_API_URL } = require('../config');
 const { NOT_FOUND } = require('./rc-helpers');
 const { sendSuccessResult, sendFailedResult } = require('./response-helpers');
 

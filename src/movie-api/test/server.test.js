@@ -6,7 +6,7 @@ const { testServerHelpers } = require('./helpers/server.test');
 
 chai.use(chaiHttp);
 
-describe('Movie Server API', () => {
+const movieServerTest = () => {
   describe('/GET search', () => {
     testServerHelpers('/search');
   });
@@ -14,4 +14,6 @@ describe('Movie Server API', () => {
   describe('/GET detail', () => {
     testServerHelpers('/detail');
   });
-});
+};
+
+module.exports = { movieServerTest };

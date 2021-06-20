@@ -1,7 +1,7 @@
 const { DataTypes, Sequelize } = require('sequelize');
-const db = require('./connection');
+const { db, dbTest } = require('./connection');
 
-const ApiLog = db.define('ApiLog', {
+const modelAttributes = {
   id: {
     primaryKey: true,
     type: DataTypes.INTEGER,
@@ -22,9 +22,14 @@ const ApiLog = db.define('ApiLog', {
     type: DataTypes.DATE,
     defaultValue: Sequelize.NOW,
   },
-}, {
+};
+
+const modelOptions = {
   tableName: 'api_log',
   timestamps: false,
-});
+};
 
-module.exports = ApiLog;
+const ApiLog = db.define('ApiLog', modelAttributes, modelOptions);
+const ApiLogTest = dbTest.define('ApiLog', modelAttributes, modelOptions);
+
+module.exports = { ApiLog, ApiLogTest };

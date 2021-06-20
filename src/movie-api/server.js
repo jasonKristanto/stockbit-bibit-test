@@ -1,24 +1,32 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const { SERVER_PORT } = require('./config');
+const { DEV, TEST } = require('./config');
 
 const routes = require('./routes');
-const db = require('./models/connection');
+const { dbTest } = require('./models/connection');
 
 const server = express();
+let serverPort = 3000;
 
 server.use(bodyParser.json());
 server.use('/', routes);
 
-db.authenticate().then(() => {
-  console.log('Connection has been established successfully.');
-}).catch((error) => {
-  console.log('Unable to connect to the database:', error);
-});
+if (process.env.NODE_ENV === 'test') {
+  serverPort = TEST.SERVER_PORT;
+  dbTest.authenticate().then(() => {
+    console.log('Connection has been established successfully.');
+  }).catch((error) => {
+    console.log('Unable to connect to the database:', error);
+  });
+} else {
+  serverPort = DEV.SERVER_PORT;
+}
 
-server.listen(SERVER_PORT, () => {
-  console.log(`Server is running on localhost:${SERVER_PORT}`);
+server.listen(serverPort, () => {
+  console.log(`Server is running on localhost:${serverPort}`);
 });
 
 module.exports = server;
