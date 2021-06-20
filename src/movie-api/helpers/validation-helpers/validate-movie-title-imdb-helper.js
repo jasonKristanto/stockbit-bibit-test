@@ -1,17 +1,17 @@
 const validationHelpers = require('../helpers');
 
-const validateMovieTitleImdbParams = (title) => {
+const validateMovieTitleImdbParams = (title, attributes = 'Title') => {
   if (!validationHelpers.isExist(title)) {
     return {
       status: 'failed',
-      message: 'Title parameter is required',
+      message: `${attributes} parameter is required`,
     };
   }
 
   if (!validationHelpers.isString(title)) {
     return {
       status: 'failed',
-      message: 'Title parameter must be a string',
+      message: `${attributes} parameter must be a string`,
     };
   }
 

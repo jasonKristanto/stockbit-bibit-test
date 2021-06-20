@@ -14,7 +14,7 @@ exports.validateRequestDetailParams = async (req, res, next) => {
 
   await insertApiLogData(req);
 
-  const movieImdbValidationResult = validateMovieTitleImdbParams(imdb);
+  const movieImdbValidationResult = validateMovieTitleImdbParams(imdb, 'Imdb');
   const movieTitleValidationResult = validateMovieTitleImdbParams(title);
 
   if (movieImdbValidationResult.status === 'failed' && movieTitleValidationResult.status === 'failed') {
